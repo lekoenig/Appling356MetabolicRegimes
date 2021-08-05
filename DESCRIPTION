@@ -1,0 +1,22 @@
+Package: Appling356MetabolicRegimes
+Title: Download Appling River Metabolism Data
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Lauren",
+           family = "Koenig",
+           role = c("aut", "cre"),
+           email = "lauren.koenig@flbs.umt.edu")
+Description: This package leverages functionality from the sbtools package 
+    to download data products from ScienceBase related to the U.S. Geological 
+    Survey data release, Appling et al. 2018, Metabolism estimates for 356 
+    U.S. rivers (2007-2017). DOI: https://doi.org/10.5066/F70864KX.
+License: CC0
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    dataRetrieval,
+    sbtools
+Depends: 
+    R (>= 2.10)
