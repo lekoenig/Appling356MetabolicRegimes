@@ -33,7 +33,8 @@ ScienceBase. If running a function is taking a very long time or if you
 experience errors that reference issues with item\_file\_download, it’s
 possible that ScienceBase is not available or is responding slowly at
 the moment. Try re-running the function, testing whether ScienceBase is
-available by running TRUE, or making some tea and trying again in a bit.
+available by running sbtools::sb\_ping(), or making some tea and trying
+again in a bit.
 
 ``` r
 library(Appling356MetabolicRegimes)
@@ -51,9 +52,7 @@ timeseries_dat <- load_timeseries_data(sitename = "nwis_01036390",zip_dir = "./d
   
 # For a given site, download the data used to estimate metabolism:
 input_dat <- download_model_inputs(sitename = "nwis_01184000",save_dir = "./data/model_inputs")
-#> Warning in unzip(zipfile = modelinput_zips, exdir = save_dir,
-#> overwrite = overwrite_file): not overwriting file './data/model_inputs/
-#> nwis_01184000_input.tsv
+
 # Download the model specifications used to estimate metabolism:
 specs <- download_model_config(save_dir = "./data/config")
 

@@ -35,7 +35,7 @@ devtools::install_github("lekoenig/Appling356MetabolicRegimes")
 
 This package consists of a set of functions to download each data release item directly from ScienceBase. Documentation includes examples to download data for multiple sites.  
 
-Note that on occasion functions may hang up while connecting to ScienceBase. If running a function is taking a very long time or if you experience errors that reference issues with item_file_download, it's possible that ScienceBase is not available or is responding slowly at the moment. Try re-running the function, testing whether ScienceBase is available by running `r sbtools::sb_ping()`, or making some tea and trying again in a bit.  
+Note that on occasion functions may hang up while connecting to ScienceBase. If running a function is taking a very long time or if you experience errors that reference issues with item_file_download, it's possible that ScienceBase is not available or is responding slowly at the moment. Try re-running the function, testing whether ScienceBase is available by running sbtools::sb_ping(), or making some tea and trying again in a bit.  
 
 ```{r example}
 library(Appling356MetabolicRegimes)
