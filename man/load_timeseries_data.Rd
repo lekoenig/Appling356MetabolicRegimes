@@ -33,3 +33,6 @@ selected_sites_ls <- lapply(selected_sites,load_timeseries_data,zip_dir = "./dat
 names(selected_sites_ls) <- selected_sites
 }
 }
+\keyword{series}
+\keyword{time}
+\keyword{timeseries}

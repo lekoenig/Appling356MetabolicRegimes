@@ -37,3 +37,6 @@ lapply(pc_sites$site_name,download_timeseries_data,
 }
 
 }
+\keyword{series}
+\keyword{time}
+\keyword{timeseries}

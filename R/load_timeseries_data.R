@@ -16,6 +16,8 @@
 #'
 #' @importFrom utils unzip read.csv
 #'
+#' @keywords timeseries time series
+#'
 #' @examples
 #' \dontrun{
 #'

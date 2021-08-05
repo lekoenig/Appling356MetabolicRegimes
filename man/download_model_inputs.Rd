@@ -4,12 +4,14 @@
 \alias{download_model_inputs}
 \title{Download metabolism model inputs}
 \usage{
-download_model_inputs(sitename, save_dir = temp)
+download_model_inputs(sitename, save_dir = temp, overwrite_file = FALSE)
 }
 \arguments{
 \item{sitename}{The sitename should be in the same format used in the site data. See examples below.}
 
 \item{save_dir}{Path to save .tsv file containing model inputs. If save_dir isn't specified, model inputs will not be saved locally.}
+
+\item{overwrite_file}{Boolean indicating if SITENAME_input.tsv file should be overwritten if it already exists. Default is FALSE.}
 }
 \value{
 Returns one data frame per site containing formatted model input data.
@@ -30,3 +32,5 @@ names(selected_inputs_ls) <- selected_sites
 }
 
 }
+\keyword{input}
+\keyword{model}

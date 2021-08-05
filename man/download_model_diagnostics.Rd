@@ -4,7 +4,15 @@
 \alias{download_model_diagnostics}
 \title{Download model diagnostics}
 \usage{
-download_model_diagnostics()
+download_model_diagnostics(
+save_dir,
+overwrite_file
+)
+}
+\arguments{
+\item{save_dir}{Path to save .tsv file containing model diagnostics. If save_dir isn't specified, model diagnostics file will not be saved locally.}
+
+\item{overwrite_file}{Boolean indicating if diagnostics.tsv file should be overwritten if it already exists. Default is FALSE.}
 }
 \value{
 Returns a data frame with one row per model.

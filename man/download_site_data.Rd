@@ -4,7 +4,10 @@
 \alias{download_site_data}
 \title{Download site data}
 \usage{
-download_site_data()
+download_site_data(save_dir = temp)
+}
+\arguments{
+\item{save_dir}{Path to save .tsv file containing site data. If save_dir isn't specified, site data will not be saved locally.}
 }
 \value{
 Returns a data frame containing one row of site identifiers, details, and quality indicators per site
@@ -14,5 +17,11 @@ Download site information for all sites contained within "Metabolic estimates fo
 }
 \examples{
 download_site_data()
+
+\dontrun{
+
+pc_sites <- download_site_data(save_dir = "./data/site_data")
+}
+
 }
 \keyword{site}

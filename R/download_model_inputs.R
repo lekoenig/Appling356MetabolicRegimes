@@ -4,9 +4,12 @@
 #'
 #' @param sitename The sitename should be in the same format used in the site data. See examples below.
 #' @param save_dir Path to save .tsv file containing model inputs. If save_dir isn't specified, model inputs will not be saved locally.
+#' @param overwrite_file Boolean indicating if SITENAME_input.tsv file should be overwritten if it already exists. Default is FALSE.
 #'
 #' @return Returns one data frame per site containing formatted model input data.
 #' @export download_model_inputs
+#'
+#' @keywords model input
 #'
 #' @importFrom utils unzip read.csv
 #'
@@ -23,7 +26,7 @@
 #' }
 #'
 
-download_model_inputs <- function(sitename,save_dir=temp){
+download_model_inputs <- function(sitename,save_dir=temp,overwrite_file=FALSE){
 
   if(length(sitename)>1) stop("Error: more than one site given in sitename")
 
@@ -43,7 +46,7 @@ download_model_inputs <- function(sitename,save_dir=temp){
   modelinput_zips <- sbtools::item_file_download(sb_id = request_id,dest_dir = temp,overwrite_file = TRUE)
 
   # Unzip model inputs:
-  unzip(zipfile=modelinput_zips,exdir=save_dir,overwrite = TRUE)
+  unzip(zipfile=modelinput_zips,exdir=save_dir,overwrite = overwrite_file)
   mod_input <- read.csv(paste(save_dir,"/",sitename,"_input.tsv",sep=""),header=TRUE,stringsAsFactors = FALSE,sep="\t")
   return(mod_input)
 }

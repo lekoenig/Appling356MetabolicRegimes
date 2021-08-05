@@ -4,7 +4,10 @@
 \alias{download_model_config}
 \title{Download metabolism model configurations}
 \usage{
-download_model_config()
+download_model_config(save_dir)
+}
+\arguments{
+\item{save_dir}{Path to save .tsv file containing model configurations. If save_dir isn't specified, model specifications will not be saved locally.}
 }
 \value{
 Returns one data frame with one row per model.
@@ -13,7 +16,9 @@ Returns one data frame with one row per model.
 Download model specifications used for estimating metabolism. This function will download and load a table containing one row per model. See metadata associated with data release item 5: \href{https://www.sciencebase.gov/catalog/item/59eb9b86e4b0026a55ffe379}{Model configurations}.
 }
 \examples{
-download_model_config()
+specs <- download_model_config()
 
 
 }
+\keyword{configurations}
+\keyword{specifications}

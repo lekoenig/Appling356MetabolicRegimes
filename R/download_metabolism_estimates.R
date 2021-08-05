@@ -3,7 +3,9 @@
 #' Download daily metabolism estimates and potential predictor variables for 356 rivers. See metadata associated with data release item 8: \href{https://www.sciencebase.gov/catalog/item/59eb9c0ae4b0026a55ffe389}{Metabolism estimates and predictors}.
 #'
 #' @param save_dir Path to save .tsv file containing daily metabolism estimates. If save_dir isn't specified, metabolism estimates will not be saved locally.
-#' @param overwrite_file Boolean indicating if daily_predictions.tsv file should be overwritten if it already exists.
+#' @param overwrite_file Boolean indicating if daily_predictions.tsv file should be overwritten if it already exists. Default is FALSE.
+#'
+#' @keywords estimates predictor
 #'
 #' @return Returns one data frame containing daily metabolism estimates for 356 rivers.
 #' @export download_metabolism_estimates

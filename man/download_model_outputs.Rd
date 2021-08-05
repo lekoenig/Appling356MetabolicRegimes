@@ -4,12 +4,14 @@
 \alias{download_model_outputs}
 \title{Download metabolism model outputs}
 \usage{
-download_model_outputs(sitename, save_dir = temp)
+download_model_outputs(sitename, save_dir = temp, overwrite_file = FALSE)
 }
 \arguments{
 \item{sitename}{The sitename should be in the same format used in the site data. See examples below.}
 
 \item{save_dir}{Path to save .zip file containing model outputs. If save_dir isn't specified, the zip file containing model outputs will not be saved locally.}
+
+\item{overwrite_file}{Boolean indicating if .zip folder should be overwritten if it already exists. Default is FALSE.}
 }
 \value{
 Returns a list containing five data frames per site that describe the model fits.
@@ -28,3 +30,5 @@ download_model_outputs("nwis_01184000",save_dir = "./data/model_outputs")
 
 
 }
+\keyword{model}
+\keyword{output}

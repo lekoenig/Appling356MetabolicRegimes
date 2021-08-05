@@ -9,7 +9,7 @@ download_metabolism_estimates(save_dir = temp, overwrite_file = FALSE)
 \arguments{
 \item{save_dir}{Path to save .tsv file containing daily metabolism estimates. If save_dir isn't specified, metabolism estimates will not be saved locally.}
 
-\item{overwrite_file}{Boolean indicating if daily_predictions.tsv file should be overwritten if it already exists.}
+\item{overwrite_file}{Boolean indicating if daily_predictions.tsv file should be overwritten if it already exists. Default is FALSE.}
 }
 \value{
 Returns one data frame containing daily metabolism estimates for 356 rivers.
@@ -25,3 +25,5 @@ download_metabolism_estimates(save_dir = "./data/daily_estimates",overwrite_file
 }
 
 }
+\keyword{estimates}
+\keyword{predictor}

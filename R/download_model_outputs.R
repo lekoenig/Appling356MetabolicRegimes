@@ -4,11 +4,14 @@
 #'
 #' @param sitename The sitename should be in the same format used in the site data. See examples below.
 #' @param save_dir Path to save .zip file containing model outputs. If save_dir isn't specified, the zip file containing model outputs will not be saved locally.
+#' @param overwrite_file Boolean indicating if .zip folder should be overwritten if it already exists. Default is FALSE.
 #'
 #' @return Returns a list containing five data frames per site that describe the model fits.
 #' @export download_model_outputs
 #'
 #' @importFrom utils unzip read.csv
+#'
+#' @keywords model output
 #'
 #' @examples
 #' download_model_outputs("nwis_01184000")
@@ -20,7 +23,7 @@
 #' }
 #'
 #'
-download_model_outputs <- function(sitename,save_dir=temp){
+download_model_outputs <- function(sitename,save_dir=temp,overwrite_file=FALSE){
 
   if(length(sitename)>1) stop("Error: more than one site given in sitename")
 
@@ -37,7 +40,7 @@ download_model_outputs <- function(sitename,save_dir=temp){
 
   # Download zip folders containing requested model outputs:
   temp <- tempdir()
-  modeloutput_zips <- sbtools::item_file_download(sb_id = request_id,dest_dir = save_dir,overwrite_file = TRUE)
+  modeloutput_zips <- sbtools::item_file_download(sb_id = request_id,dest_dir = save_dir,overwrite_file = overwrite_file)
 
   # Unzip model outputs:
   unzip(zipfile=modeloutput_zips,overwrite = TRUE,exdir=temp)

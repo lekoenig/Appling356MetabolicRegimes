@@ -6,6 +6,7 @@
 #' @keywords spatial
 #' @export get_spatial_url
 #'
+#'
 #' @examples
 #' get_spatial_url
 
