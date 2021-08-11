@@ -5,8 +5,9 @@
 #' @param sitename The sitename should be in the same format used in the site data. See examples below.
 #' @param save_dir Path to save .zip file containing model outputs. If save_dir isn't specified, the zip file containing model outputs will not be saved locally.
 #' @param overwrite_file Boolean indicating if .zip folder should be overwritten if it already exists. Default is FALSE.
+#' @param res a character string that indicates which available model fits should be returned, where RES indicates the resolution of the input data. Default returns all available fits for a given sitename.
 #'
-#' @return Returns a list containing five data frames per site that describe the model fits.
+#' @return Returns a nested list containing one list per model fit, each of which contains five data frames per site that describe the model fits.
 #' @export download_model_outputs
 #'
 #' @importFrom utils unzip read.csv
@@ -16,6 +17,8 @@
 #' @examples
 #' download_model_outputs("nwis_01184000")
 #'
+#' download_model_outputs("nwis_01400500",res=c("15min","30min","60min"))
+#'
 #'
 #' \dontrun{
 #'
@@ -23,7 +26,7 @@
 #' }
 #'
 #'
-download_model_outputs <- function(sitename,save_dir=temp,overwrite_file=FALSE){
+download_model_outputs <- function(sitename,save_dir=temp,overwrite_file=FALSE,res=c("5min","10min","12min","15min","30min","60min")){
 
   if(length(sitename)>1) stop("Error: more than one site given in sitename")
 
@@ -42,22 +45,44 @@ download_model_outputs <- function(sitename,save_dir=temp,overwrite_file=FALSE){
   temp <- tempdir()
   modeloutput_zips <- sbtools::item_file_download(sb_id = request_id,dest_dir = save_dir,overwrite_file = overwrite_file)
 
-  # Unzip model outputs:
-  unzip(zipfile=modeloutput_zips,overwrite = TRUE,exdir=temp)
+  # Isolate fits:
+  fit_nm <- sapply(strsplit(modeloutput_zips, "_"), function(x) x[4])
+  fit_nm_selected <- which(fit_nm %in% res)
 
-  # Compile model outputs within a list:
-  filetypes <- c("warnings.txt","KQ_binned.tsv","KQ_overall.tsv","overall.tsv","daily.tsv")
-  warnings <- readLines(paste(temp,"/",filetypes[1],sep=""))
-  KQ_binned <- read.csv(paste(temp,"/",filetypes[2],sep=""),header=TRUE,sep="\t",stringsAsFactors = FALSE)
-  KQ_overall <- read.csv(paste(temp,"/",filetypes[3],sep=""),header=TRUE,sep="\t",stringsAsFactors = FALSE)
-  overall <- read.csv(paste(temp,"/",filetypes[4],sep=""),header=TRUE,sep="\t",stringsAsFactors = FALSE)
-  daily <- read.csv(paste(temp,"/",filetypes[5],sep=""),header=TRUE,sep="\t",stringsAsFactors = FALSE)
+  # For each fit in fit_nm_select, unzip model outputs and compile a list containing associated files:
+  fit_ls <- lapply(modeloutput_zips[fit_nm_selected],function(x){
 
-  mod_outputs <- list(warnings = warnings,
-                      KQ_binned = KQ_binned,
-                      KQ_overall = KQ_overall,
-                      overall = overall,
-                      daily = daily)
-  return(mod_outputs)
+      # Unzip model outputs:
+      unzip(zipfile = x, overwrite = TRUE, exdir = temp)
 
+      # Compile model outputs within a list:
+      filetypes <- c("warnings.txt","KQ_binned.tsv","KQ_overall.tsv","overall.tsv","daily.tsv")
+
+      warnings_exists <- file.exists(paste(temp, "/", filetypes[1], sep = ""))
+      if(warnings_exists==TRUE){
+          warnings <- readLines(paste(temp, "/", filetypes[1], sep = ""))
+      }else{
+          warnings <- ""
+      }
+
+      KQ_binned <- read.csv(paste(temp, "/", filetypes[2], sep = ""),header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+      KQ_overall <- read.csv(paste(temp, "/", filetypes[3], sep = ""),header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+      overall <- read.csv(paste(temp, "/", filetypes[4], sep = ""),header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+      daily <- read.csv(paste(temp, "/", filetypes[5], sep = ""),header = TRUE, sep = "\t", stringsAsFactors = FALSE)
+
+      mod_outputs <- list(warnings = warnings,
+                          KQ_binned = KQ_binned,
+                          KQ_overall = KQ_overall,
+                          overall = overall,
+                          daily = daily)
+  })
+
+  names(fit_ls) <- fit_nm[fit_nm_selected]
+  return(fit_ls)
 }
+
+
+
+
+
+

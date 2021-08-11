@@ -4,7 +4,12 @@
 \alias{download_model_outputs}
 \title{Download metabolism model outputs}
 \usage{
-download_model_outputs(sitename, save_dir = temp, overwrite_file = FALSE)
+download_model_outputs(
+  sitename,
+  save_dir = temp,
+  overwrite_file = FALSE,
+  res = c("5min", "10min", "12min", "15min", "30min", "60min")
+)
 }
 \arguments{
 \item{sitename}{The sitename should be in the same format used in the site data. See examples below.}
@@ -12,15 +17,19 @@ download_model_outputs(sitename, save_dir = temp, overwrite_file = FALSE)
 \item{save_dir}{Path to save .zip file containing model outputs. If save_dir isn't specified, the zip file containing model outputs will not be saved locally.}
 
 \item{overwrite_file}{Boolean indicating if .zip folder should be overwritten if it already exists. Default is FALSE.}
+
+\item{res}{a character string that indicates which available model fits should be returned, where RES indicates the resolution of the input data. Default returns all available fits for a given sitename.}
 }
 \value{
-Returns a list containing five data frames per site that describe the model fits.
+Returns a nested list containing one list per model fit, each of which contains five data frames per site that describe the model fits.
 }
 \description{
 Download complete fits from metabolism estimation models. This function will download and load five data frames per model that collectively describe the model fits. See ScienceBase for a complete description of model output files. See metadata associated with data release item 6: \href{https://www.sciencebase.gov/catalog/item/59eb9ba6e4b0026a55ffe37f}{Model outputs}.
 }
 \examples{
 download_model_outputs("nwis_01184000")
+
+download_model_outputs("nwis_01400500",res=c("15min","30min","60min"))
 
 
 \dontrun{

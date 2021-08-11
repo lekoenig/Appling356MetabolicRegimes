@@ -59,7 +59,7 @@ specs <- download_model_config(save_dir = "./data/config")
 
 # For a given site, download complete fits from metabolism models:
 # returns a list containing model parameters and estimated K600-discharge nodes
-output_dat <- download_model_outputs("nwis_01184000",save_dir = "./data/model_outputs")
+output_dat <- download_model_outputs("nwis_01184000",save_dir = "./data/model_outputs",res = c("15min"))
 
 # Inspect diagnostics and assessments of model performance
 diag_dat <- download_model_diagnostics(save_dir = "./data")
@@ -72,10 +72,10 @@ metab_dat <- download_metabolism_estimates(save_dir = "./data/daily_estimates")
 
 ## Disclaimer  
 
-I developed the wrapper functions included here to aid my own personal workflows that rely on the Appling et al. 2018 data release. This package is not associated with the original ScienceBase data release, and comes with no warranty. This package is provided "AS IS." That being said, if you come across bugs or have any questions, please let me know: [https://github.com/lekoenig/Appling356MetabolicRegimes/issues](https://github.com/lekoenig/Appling356MetabolicRegimes/issues).  
+I developed the wrapper functions included here to aid my own personal workflows that rely on the Appling et al. 2018 data release. This package is not associated with the original ScienceBase data release, and comes with no warranty. This package is provided "AS IS." However, if you come across bugs or have any questions/suggestions for improvement, please let me know: [https://github.com/lekoenig/Appling356MetabolicRegimes/issues](https://github.com/lekoenig/Appling356MetabolicRegimes/issues).  
     
 **Some shout-outs:**  
-The workhorse underlying the data download functions used here is [sbtools](https://github.com/USGS-R/sbtools). Thanks to USGS-R for developing and supporting these tools to interface with ScienceBase. Also, thank you to Alison Appling and co-authors for their hard work in creating and releasing "Metabolism estimates for 356 U.S. rivers (2007-2017)" to enable new research questions and directions in freshwater science. 
+The workhorse underlying the data download functions used here is [sbtools](https://github.com/USGS-R/sbtools). Thanks to USGS-R for developing and supporting these tools to interface with ScienceBase. Also, thank you to Alison Appling and co-authors for their hard work in creating and releasing "Metabolism estimates for 356 U.S. rivers (2007-2017)."  
 
 
 
